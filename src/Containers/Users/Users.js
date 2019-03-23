@@ -62,11 +62,6 @@ export default class Users extends Component {
         console.log(data);
         this.props.history.push('/user', data)
     }
-
-
-
-
-
     displayUserData = data => data && (
         data.map(val => <tr key={val.id}>
             <td>{val.firstName}</td>
@@ -92,23 +87,25 @@ export default class Users extends Component {
             <React.Fragment>
                 <Header />
                 <h1 className="text-center mt-4"> Implementation of Axios</h1>
-                <table className="table table-bordered table-sm mt-5">
-                    <thead>
-                        <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Email</th>
-                            <th>gender</th>
-                            <th>Color</th>
-                            <th>About</th>
-                            <th>Employee</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.displayUserData(userData)}
-                    </tbody>
-                </table>
+                <div className="container-fluid">
+                    <table className="table table-bordered table-sm mt-5">
+                        <thead>
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>gender</th>
+                                <th>Color</th>
+                                <th>About</th>
+                                <th>Employee</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.displayUserData(userData)}
+                        </tbody>
+                    </table>
+                </div>
             </React.Fragment>
         )
     }
