@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import './App.css';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import asyncComponent from './Hoc/AsyncComponent';
-import Users from './Containers/Users/Users';
+
 
 const asyncHome = asyncComponent(() => {
   return import('./Containers/Home');
@@ -15,15 +15,19 @@ const asyncLogin = asyncComponent(() => {
   return import('./Containers/Auth/Login');
 })
 
+const newLazyUsers = lazy(() => import('./Containers/Users/Users'))
+
 class App extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={asyncHome} />
-        <Route path="/user" component={asyncAbout} />
-        <Route path="/login" component={asyncLogin} />
-        <Route path="/users" component={Users} />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={asyncHome} />
+          <Route path="/user" component={asyncAbout} />
+          <Route path="/login" component={asyncLogin} />
+          <Route path="/users" component={newLazyUsers} />
+        </Switch>
+      </Suspense>
     );
   }
 }
